@@ -1,0 +1,118 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Main {
+    public static void main(String[] args) {
+
+        //Array comun
+        System.out.println("Array Comun");
+        String[] nombres = {"Juan", "Valeria", "Oscar", "Nacho", "Pilar"};
+
+        for (String nombre : nombres) {
+            System.out.print(nombre + " ");
+        }
+        System.out.println("Array de dos dimensiones");
+
+        //Array de dos dimensiones
+        int[][] arrayBi = {
+                {1, 2, 3, 4},
+                {15, 30, 45, 60}
+        };
+
+        for (int i = 0; i < arrayBi.length; i++) {
+            for (int j = 0; j < arrayBi[i].length; j++) {
+                System.out.println("En la posicion " + i + ", " + j);
+                System.out.println(arrayBi[i][j]);
+            }
+        }
+
+        //Vector
+        System.out.println("Vector");
+        Vector<String> vector = new Vector<>();
+        vector.add("Juan");
+        vector.add("Valeria");
+        vector.add("Oscar");
+        vector.add("Nacho");
+        vector.add("Pilar");
+
+        vector.remove(2);
+        vector.remove(3);
+
+        for (String s : vector) {
+            System.out.println(s + " ");
+        }
+
+        //Array List
+        System.out.println("Array List");
+        ArrayList<String> lista = new ArrayList<>();
+        lista.add("Juan");
+        lista.add("Valeria");
+        lista.add("Oscar");
+        lista.add("Nacho");
+        for (String s : lista) {
+            System.out.println(s);
+        }
+        //LinkedList
+        System.out.println("Linked List");
+        LinkedList<String> listaLinked = new LinkedList<>(lista);
+        for (String s : listaLinked) {
+            System.out.println(s);
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> numeros = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            numeros.add(scanner.nextInt());
+        }
+        for (int i = 0; i < numeros.size(); i++) {
+            if (numeros.get(i) % 2 == 0) {
+                numeros.remove(i);
+            }
+        }
+        System.out.println(numeros);
+
+        //Funcion divide por 0
+
+        System.out.println("Capturar Exception desde main");
+        try {
+            System.out.println("Ingrese dos numeros");
+            DividePorCero(scanner.nextInt(), scanner.nextInt());
+        } catch (ArithmeticException e) {
+            System.out.println("Esto no puede hacerse.");
+        } finally {
+            System.out.println("Demo de código");
+        }
+
+
+        copiarFichero();
+
+
+    }
+
+    public static void DividePorCero(double a, double b) throws ArithmeticException {
+
+        double resultado;
+        try {
+            resultado = a / b;
+            System.out.println(resultado);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException();
+        }
+    }
+
+    public static void copiarFichero() {
+        Scanner input = new Scanner(System.in);
+        try {
+            InputStream fileIn = new FileInputStream("C:\\Users\\juanc\\OneDrive\\Documentos\\HolaMundo.txt");
+            PrintStream fileOut = new PrintStream("nueva-copia.txt");
+            System.out.println("Fichero copiado con exito");
+            } catch (FileNotFoundException e) {
+            System.out.println("El fichero no existe");
+            }
+
+    }
+
+}

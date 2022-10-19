@@ -6,6 +6,15 @@ import java.util.Vector;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        //Dar vuelva un texto
+        System.out.println("Escribe texto");
+        String texto = scanner.nextLine();
+
+        for (int i = texto.length()-1; i >= 0; i--){
+            System.out.print(texto.charAt(i));
+        }
 
         //Array comun
         System.out.println("Array Comun");
@@ -62,7 +71,7 @@ public class Main {
             System.out.println(s);
         }
 
-        Scanner scanner = new Scanner(System.in);
+
         ArrayList<Integer> numeros = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             numeros.add(scanner.nextInt());
@@ -86,8 +95,14 @@ public class Main {
             System.out.println("Demo de código");
         }
 
+        //Copiar Fichero
+        System.out.println("Intruduce ruta del fichero");
+        String fileIn = scanner.next();
+        System.out.println("introduce nuevo fichero");
+        String fileOut = scanner.next();
 
-        copiarFichero();
+        copiarFichero(fileIn,fileOut);
+
 
 
     }
@@ -103,14 +118,19 @@ public class Main {
         }
     }
 
-    public static void copiarFichero() {
-        Scanner input = new Scanner(System.in);
+    public static void copiarFichero(String fileIn , String fileOut) {
+        
         try {
-            InputStream fileIn = new FileInputStream("C:\\Users\\juanc\\OneDrive\\Documentos\\HolaMundo.txt");
-            PrintStream fileOut = new PrintStream("nueva-copia.txt");
+            InputStream in = new FileInputStream(fileIn);
+            byte[] datos = in.readAllBytes();
+            in.close();
+
+            PrintStream out = new PrintStream(fileOut);
+            out.write(datos);
+            out.close();
             System.out.println("Fichero copiado con exito");
-            } catch (FileNotFoundException e) {
-            System.out.println("El fichero no existe");
+            } catch (Exception e) {
+            System.out.println("El fichero no existe" + e.getMessage());
             }
 
     }
